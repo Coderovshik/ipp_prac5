@@ -106,8 +106,78 @@ func (c *Controller) HandleRemovePerson(w http.ResponseWriter, r *http.Request) 
 type Router struct{}
 
 func NewRouter(pc *Controller) *Router {
+	// swagger:operation GET /people/{id} getPerson
+	//
+	// Returns a person with sepcified id
+	//
+	// any existing person
+	//
+	// ---
+	// produces:
+	// - application/json
+	// parameters:
+	// - name: id
+	//   in: path
+	//   description: person id
+	//   required: true
+	//   type: integer
+	//   format: int32
+	// responses:
+	//   '200':
+	//     description: person response
+	//     schema:
+	//       type: object
+	//       properties:
+	//		   firstName:
+	//		     type: integer
+	//		   secondName:
+	//			 type: string
+	//		   age:
+	//			 type: integer
+	//   '500':
+	//     description: any error
 	http.HandleFunc("GET /people/{id}", pc.HandleGetPerson)
+
+	// swagger:operation POST /people/{id} setPerson
+	//
+	// Sets person with sepcified id
+	//
+	// any person
+	//
+	// ---
+	// parameters:
+	// - name: id
+	//   in: path
+	//   description: person id
+	//   required: true
+	//   type: integer
+	//   format: int32
+	// responses:
+	//   '200':
+	//     description: person response
+	//   '500':
+	//     description: any error
 	http.HandleFunc("POST /people/{id}", pc.HandleSetPerson)
+
+	// swagger:operation DELETE /people/{id} removePerson
+	//
+	// Removes person with sepcified id
+	//
+	// any existing person
+	//
+	// ---
+	// parameters:
+	// - name: id
+	//   in: path
+	//   description: person id
+	//   required: true
+	//   type: integer
+	//   format: int32
+	// responses:
+	//   '200':
+	//     description: person response
+	//   '500':
+	//     description: any error
 	http.HandleFunc("DELETE /people/{id}", pc.HandleRemovePerson)
 
 	return &Router{}
