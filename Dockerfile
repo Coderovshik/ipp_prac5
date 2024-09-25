@@ -2,9 +2,7 @@ FROM golang:1.22-alpine AS builder
 
 WORKDIR /usr/local/src
 
-COPY ["go.mod", "go.sum", "./"]
-RUN --mount=type=cache,target=/go/pkg/mod/ \
-    go mod download -x
+COPY ["go.mod", "./"]
 COPY . .
 
 RUN go build -o ./api ./main.go
