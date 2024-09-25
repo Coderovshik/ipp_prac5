@@ -42,6 +42,20 @@ func NewController(ds *Datastore) *Controller {
 	}
 }
 
+// getPerson get person if exists
+//
+// swagger:route GET /person/{id} getPerson
+//
+// get person if exists
+//
+// Produces:
+// - application/json
+//
+// Schemes: http
+//
+// Responses:
+// 500:description:error
+// 200:description:success
 func (c *Controller) HandleGetPerson(w http.ResponseWriter, r *http.Request) {
 	idStr := r.PathValue("id")
 	id, err := strconv.Atoi(idStr)
@@ -66,6 +80,20 @@ func (c *Controller) HandleGetPerson(w http.ResponseWriter, r *http.Request) {
 	w.Write(data)
 }
 
+// setPerson set person
+//
+// swagger:route POST /person/{id} setPerson
+//
+// set person
+//
+// Consumes:
+// - application/json
+//
+// Schemes: http
+//
+// Responses:
+// 500:description:error
+// 200:description:success
 func (c *Controller) HandleSetPerson(w http.ResponseWriter, r *http.Request) {
 	idStr := r.PathValue("id")
 	id, err := strconv.Atoi(idStr)
@@ -87,6 +115,17 @@ func (c *Controller) HandleSetPerson(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
+// removePerson remove person
+//
+// swagger:route DELETE /person/{id} removePerson
+//
+// remove person
+//
+// Schemes: http
+//
+// Responses:
+// 500:description:error
+// 200:description:success
 func (c *Controller) HandleRemovePerson(w http.ResponseWriter, r *http.Request) {
 	idStr := r.PathValue("id")
 	id, err := strconv.Atoi(idStr)
@@ -106,78 +145,8 @@ func (c *Controller) HandleRemovePerson(w http.ResponseWriter, r *http.Request) 
 type Router struct{}
 
 func NewRouter(pc *Controller) *Router {
-	// swagger:operation GET /people/{id} getPerson
-	//
-	// Returns a person with sepcified id
-	//
-	// any existing person
-	//
-	// ---
-	// produces:
-	// - application/json
-	// parameters:
-	// - name: id
-	//   in: path
-	//   description: person id
-	//   required: true
-	//   type: integer
-	//   format: int32
-	// responses:
-	//   '200':
-	//     description: person response
-	//     schema:
-	//       type: object
-	//       properties:
-	//		   firstName:
-	//		     type: integer
-	//		   secondName:
-	//			 type: string
-	//		   age:
-	//			 type: integer
-	//   '500':
-	//     description: any error
 	http.HandleFunc("GET /people/{id}", pc.HandleGetPerson)
-
-	// swagger:operation POST /people/{id} setPerson
-	//
-	// Sets person with sepcified id
-	//
-	// any person
-	//
-	// ---
-	// parameters:
-	// - name: id
-	//   in: path
-	//   description: person id
-	//   required: true
-	//   type: integer
-	//   format: int32
-	// responses:
-	//   '200':
-	//     description: person response
-	//   '500':
-	//     description: any error
 	http.HandleFunc("POST /people/{id}", pc.HandleSetPerson)
-
-	// swagger:operation DELETE /people/{id} removePerson
-	//
-	// Removes person with sepcified id
-	//
-	// any existing person
-	//
-	// ---
-	// parameters:
-	// - name: id
-	//   in: path
-	//   description: person id
-	//   required: true
-	//   type: integer
-	//   format: int32
-	// responses:
-	//   '200':
-	//     description: person response
-	//   '500':
-	//     description: any error
 	http.HandleFunc("DELETE /people/{id}", pc.HandleRemovePerson)
 
 	return &Router{}

@@ -1,17 +1,10 @@
-// Package classification people.
+// Package classification people API
 //
 // Documentation of people API.
 //
-//	Schemes: http
 //	BasePath: /
 //	Version: 1.0.0
 //	Host: localhost:8080
-//
-//	Consumes:
-//	- application/json
-//
-//	Produces:
-//	- application/json
 //
 // swagger:meta
 package main

@@ -1,0 +1,49 @@
+basePath: /
+consumes:
+    - application/json
+host: localhost:8080
+info:
+    description: Documentation of people API.
+    title: people.
+    version: 1.0.0
+paths:
+    /person/{id}:
+        delete:
+            description: remove person
+            operationId: removePerson
+            responses:
+                "200":
+                    description: success
+                "500":
+                    description: error
+            schemes:
+                - http
+        get:
+            description: get person if exists
+            operationId: getPerson
+            produces:
+                - application/json
+            responses:
+                "200":
+                    description: success
+                "500":
+                    description: error
+            schemes:
+                - http
+        post:
+            consumes:
+                - application/json
+            description: set person
+            operationId: setPerson
+            responses:
+                "200":
+                    description: success
+                "500":
+                    description: error
+            schemes:
+                - http
+produces:
+    - application/json
+schemes:
+    - http
+swagger: "2.0"
